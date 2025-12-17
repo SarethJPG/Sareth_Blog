@@ -1,0 +1,732 @@
+/* === 1. RESET GLOBAL Y CONFIGURACIÓN BASE === */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff;
+  padding-top: clamp(70px, 10vh, 90px); /* sincronizado con navbar */
+  font-size: clamp(1rem, 1.2vw, 1.2rem); /* tipografía fluida */
+}
+
+
+/* === 2. DISEÑO NAVBAR === */
+.navbar {
+  background-color: #2B0A3D;
+  height: clamp(70px, 10vh, 90px); /* altura fluida */
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto; /* centrado fluido */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding-left: 6rem;  /* empuja logo hacia el borde */
+  padding-right: 6rem; /* empuja pestañas hacia el borde */
+}
+
+.logo img {
+  width: clamp(150px, 18vw, 220px); /* logo adaptable */
+  height: auto;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem; /* empuja pestañas hacia la derecha */
+  gap: 2rem; /* separación natural entre pestañas y redes */
+}
+
+.nav-tabs a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  margin-right: 3rem;
+  font-size: clamp(0.8rem, 1vw, 1rem); /* tipografía fluida */
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs a:hover {
+  font-size: clamp(0.85rem, 1.1vw, 1.1rem); /* hover fluido */
+}
+
+.nav-tabs a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #39FF14;
+}
+
+.nav-social a img {
+  width: clamp(24px, 3vw, 30px); /* iconos adaptables */
+  height: auto;
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-social a:hover img {
+  transform: scale(1.1);
+}
+
+.nav-social a {
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.nav-social a:visited,
+.nav-social a:focus,
+.nav-social a:hover {
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+/* === 3. RESPONSIVE NAVBAR === */
+.menu-toggle {
+  display: none;
+  font-size: clamp(1.5rem, 3vw, 2rem); /* tipografía fluida */
+  color: #fff;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: #2B0A3D;
+  padding: 1rem;
+  gap: 1rem;
+  position: fixed;
+  top: clamp(70px, 10vh, 90px); /* altura fluida respecto a navbar */
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.mobile-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobile-tabs a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 2.5vw, 1rem); /* tipografía fluida */
+}
+
+.mobile-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mobile-social a img {
+  width: clamp(22px, 4vw, 28px); /* iconos adaptables */
+  height: auto;
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .nav-tabs,
+  .nav-social {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  .container {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .nav-right {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo img {
+    width: clamp(120px, 90vw, 150px); /* logo adaptable en móvil */
+  }
+
+  .nav-tabs a {
+    margin-right: 1rem;
+  }
+}
+
+/* === HERO SECTION === */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* altura del hero */
+  background-image: url('imgs/img_hero_1.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000; /* color de fondo */
+  opacity: 0.85; /* opacidad ajustada */
+}
+
+.hero-content {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+  max-width: 800px;
+  padding: 0 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hero-content h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* tipografía fluida */
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem); /* tipografía fluida */
+  text-align: justify;
+  max-width: 650px;   /* controla el ancho del texto */
+  margin: 0 auto;     /* centra el bloque */
+}
+
+/* Animación base */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Desfase para título y párrafo */
+.fade-in-delay {
+  transition-delay: 0.5s; /* aparece medio segundo después */
+}
+
+
+
+#entradas {
+  position: relative;
+  height: 0;
+  scroll-margin-top: 80px; /* ajusta según la altura de tu navbar */
+}
+
+
+/* Contenedor del índice: añade padding lateral en móviles */
+.blog-index {
+  width: 100%;
+  background: #111;
+  padding: 2rem 1rem; /* margen lateral en móviles */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Limitar ancho y mantener margen lateral también en desktop */
+.blog-index > .entries-grid,
+.blog-index > .load-more {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Cuadrícula base: 3 columnas (desktop) = 3x2 (6 por bloque) */
+.entries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* Breakpoint tablet: 2 columnas = 2x2 (4 por bloque) */
+@media (max-width: 1024px) {
+  .entries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Breakpoint móvil: 1 columna = 1x2 (2 por bloque) */
+@media (max-width: 640px) {
+  .entries-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card básica */
+.card {
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #222;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Overlay en hover */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  transition: opacity 0.25s ease;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.overlay h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  color: #111;
+}
+
+.overlay p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Botón "Ver más / Ver menos" */
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem; /* coherente con margen lateral */
+}
+
+.load-more button {
+  background: #39FF14;
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.load-more button:hover {
+  background: #2ecc71;
+  transform: translateY(-1px);
+}
+
+/* Ocultar bloques hasta que se desplieguen */
+.hidden {
+  display: none;
+}
+
+/* Espacios vacíos para mantener formato del bloque */
+.card.empty {
+  visibility: hidden; /* reserva espacio, oculta contenido */
+}
+
+/* Animación base */
+.card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Sección Sobre mí */
+.about-section {
+  width: 100%;
+  min-height: 100vh; /* ocupa toda la altura visible */
+  padding: 4rem 0.5rem;
+  background: linear-gradient(to top, #111, #4B0082); /* fade up morado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  gap: 9rem;
+}
+
+/* Avatar ocupa 1/3 */
+.about-avatar {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: -12rem;
+}
+
+.about-avatar img {
+  height: 140%; /* ocupa toda la altura de la sección */
+  max-height: 90vh; /* límite para no desbordar */
+  object-fit: contain;
+}
+
+/* Contenido ocupa 2/3 */
+.about-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centrado vertical */
+  align-items: flex-start;   /* alineado a la derecha */
+  text-align: left;
+  color: #fff;
+  padding-left: 8rem;
+  padding-right: -8rem;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  align-self: flex-start; /* alineado a la derecha */
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.about-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.about-content ul li {
+  margin-bottom: 0.5rem;
+  text-align: justify;
+}
+
+/* Botones sociales */
+.social-buttons {
+  display: flex;
+  justify-content: center; /* centrados dentro de su 2/3 */
+  gap: 1rem;
+  width: 100%;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.btn-social img {
+  width: 48px;   /* tamaño del ícono */
+  height: 48px;
+  transition: transform 0.2s ease;
+}
+
+.btn-social img:hover {
+  transform: scale(1.15);
+}
+
+/* Responsivo */
+/* Responsivo */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 3rem 1rem;
+    min-height: auto;
+  }
+
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .about-avatar {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .about-avatar img {
+    max-height: 280px;
+    height: auto;
+    width: auto;
+    margin-bottom: 1rem;
+  }
+
+  .about-content {
+    padding: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-content h2 {
+    align-self: center;
+    font-size: 1.75rem;
+  }
+
+  .about-content p,
+  .about-content ul {
+    max-width: 90%;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .about-content ul {
+    list-style-position: inside;
+    padding-left: 0;
+  }
+
+  .about-content ul li {
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .social-buttons {
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .btn-social img {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Avatar fade-in (solo opacidad) */
+.fade-in-avatar {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.fade-in-avatar.visible {
+  opacity: 1;
+}
+
+/* Texto fade-in desde la derecha */
+.fade-in-text {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in-text.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* Sección de entrada */
+.entrada-section {
+  width: 100%;
+  padding: 4rem 0;
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+}
+
+.entrada-container {
+  width: 80%; /* deja 10% de margen a cada lado */
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+/* Título y subtítulo centrados */
+.entrada-titulo {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.entrada-subtitulo {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #ccc;
+}
+
+/* Imagen centrada */
+.entrada-imagen {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+/* Párrafo justificado con márgenes laterales */
+.entrada-contenido {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: justify;
+  width: 100%;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .entrada-container {
+    width: 90%;
+  }
+
+  .entrada-titulo {
+    font-size: 1.75rem;
+  }
+
+  .entrada-subtitulo {
+    font-size: 1.1rem;
+  }
+
+  .entrada-contenido {
+    font-size: 1rem;
+  }
+}
+
+/* Footer */
+.site-footer {
+  background: linear-gradient(to top, #111, #4B0082); /* coherente con tu navbar y sobre mí */
+  color: #fff;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Texto */
+.footer-info {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.footer-info p {
+  margin: 0.25rem 0;
+}
+
+/* Íconos sociales */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-icon img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease;
+}
+
+.footer-icon img:hover {
+  transform: scale(1.2);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-info {
+    font-size: 0.9rem;
+  }
+}
+
+/* Botón volver arriba */
+.footer-backtop {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.backtop-btn {
+  background: #39FF14;
+  color: #111;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.backtop-btn:hover {
+  background: #2ecc71;
+  transform: translateY(-2px);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .footer-backtop {
+    margin-top: 1.5rem;
+  }
+}
